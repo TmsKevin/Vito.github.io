@@ -18,7 +18,7 @@
       --primary-2:#ffb86b;
       --shadow:0 20px 50px rgba(0,0,0,.28);
       --radius:24px;
-      --max:1120px;
+      --max:1200px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -35,6 +35,7 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{width:min(calc(100% - 28px), var(--max));margin-inline:auto}
+    @media (min-width: 1280px){.container{width:min(calc(100% - 80px), 1380px)}}
     .pill{
       display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
       background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:.92rem
@@ -43,8 +44,8 @@
       position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);
       background:rgba(10,11,13,.72);border-bottom:1px solid rgba(255,255,255,.06)
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex:1 1 auto}
     .brand-mark{
       width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
       background:linear-gradient(135deg,var(--primary),var(--primary-2));font-weight:800;color:#fff;box-shadow:var(--shadow)
@@ -53,7 +54,9 @@
     .brand-copy strong{display:block;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .brand-copy span{display:block;font-size:.82rem;color:var(--muted)}
     .nav-links{display:none;gap:18px;color:var(--muted);font-size:.95rem}
-    .cta-top{display:flex;gap:10px;flex-wrap:wrap}
+    .cta-top{display:flex;gap:10px;flex-wrap:wrap;width:100%}
+    .cta-top .btn{flex:1 1 0;padding-inline:14px}
+    .cta-top .btn:last-child{flex:1 1 0}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
       border-radius:999px;padding:13px 18px;font-weight:700;border:1px solid transparent;
@@ -68,7 +71,7 @@
       linear-gradient(135deg, rgba(216,78,42,.16), rgba(255,184,107,.06));
       box-shadow:var(--shadow);overflow:hidden;position:relative
     }
-    .hero-grid{display:grid;gap:20px}
+    .hero-grid{display:grid;gap:20px;align-items:start}
     h1{font-size:clamp(2rem,9vw,4.4rem);line-height:.97;margin:14px 0 14px;letter-spacing:-.04em}
     .lead{font-size:1.04rem;color:var(--muted);max-width:60ch;margin:0 0 18px}
     .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
@@ -82,6 +85,7 @@
     .info-item small{display:block;color:var(--muted);margin-bottom:4px}
     section{padding:16px 0}
     .section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:16px;flex-wrap:wrap}
+    .section-head.left{justify-content:flex-start}
     .section-head h2{font-size:1.5rem;margin:0;letter-spacing:-.03em}
     .section-head p{margin:0;color:var(--muted);max-width:62ch}
     .grid,.feature-grid,.contact-grid,.menu-grid,.gallery-grid,.legal-grid{display:grid;gap:14px}
@@ -137,13 +141,24 @@
     .sticky-inner a{display:grid;place-items:center;min-height:52px;border-radius:16px;background:rgba(255,255,255,.05);font-size:.92rem;font-weight:700}
     .sticky-inner a.primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff}
     @media (min-width: 780px){
+      .nav{flex-wrap:nowrap}
+      .brand{flex:0 1 auto}
+      .cta-top{width:auto;justify-content:flex-end}
+      .cta-top .btn{flex:0 0 auto;padding-inline:18px}
       .nav-links{display:flex}
-      .hero{padding:32px 0 14px}
-      .hero-card{padding:32px}
-      .hero-grid{grid-template-columns:1.2fr .8fr;align-items:center}
+      .hero{padding:36px 0 18px}
+      .hero-card{padding:36px}
+      .hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);align-items:start}
       .feature-grid{grid-template-columns:repeat(3,1fr)}
-      .contact-grid,.gallery-grid,.legal-grid{grid-template-columns:1fr 1fr}
-      .menu-grid{grid-template-columns:1fr 1fr}
+      .contact-grid,.gallery-grid,.legal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .menu-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    }
+    @media (min-width: 1180px){
+      .hero-card,.card,.menu-group{border-radius:28px}
+      .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .menu-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+      .section-head{margin-bottom:22px}
+      .section-head p{max-width:72ch}
     }
     @media (min-width: 1020px){
       .sticky-bar{display:none}
@@ -221,7 +236,7 @@
 
     <section>
       <div class="container">
-        <div class="section-head">
+        <div class="section-head left">
           <h2>Warum die Seite funktioniert</h2>
           <p>Die wichtigsten Aktionen sind mobil sofort erreichbar: anrufen, Route starten, Speisekarte öffnen und Öffnungszeiten prüfen.</p>
         </div>
@@ -247,7 +262,7 @@
 
     <section id="bilder">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head left">
           <h2>Einblicke</h2>
           <p>Das Restaurant zeigt nicht nur gutes Essen, sondern auch zwei ganz eigene Stimmungen: gemütlich und stilvoll im Innenbereich, überraschend schön im Außenbereich.</p>
         </div>
@@ -315,7 +330,7 @@
 
     <section>
       <div class="container">
-        <div class="section-head">
+        <div class="section-head left">
           <h2>Restaurant</h2>
           <p>Ideal für Abholung, entspanntes Essen im Freien oder im Gastraum und private Feiern wie Geburtstage oder Taufen nach Anfrage.</p>
         </div>
@@ -338,7 +353,7 @@
 
     <section id="menu">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head left">
           <h2>Speisekarte</h2>
           <p>Alle Inhalte aus der vorhandenen Abholkarte sind hier in ein modernes, mobile-first Layout übertragen.</p>
         </div>
@@ -383,6 +398,7 @@
               <div class="item"><div><strong>Pinsa Tirol</strong><span>Steinpilze, Speck, Mozzarella</span></div><div class="price">15,00 €</div></div>
               <div class="item"><div><strong>Pinsa Lucana</strong><span>Zwiebeln, Peperoni, Oliven, Salsiccia, Mozzarella</span></div><div class="price">15,00 €</div></div>
             </div>
+
             <div class="menu-head">
               <h3>Pasta & Ofen</h3>
               <p>Von Aglio Olio bis Trüffel und Lasagna.</p>
@@ -469,7 +485,7 @@
     <section id="datenschutz">
       <div class="container">
         <article class="card legal-copy">
-          <div class="section-head">
+          <div class="section-head left">
             <h2>Datenschutzerklärung</h2>
             <p>Hinweise zur Datenverarbeitung auf dieser Website.</p>
           </div>
