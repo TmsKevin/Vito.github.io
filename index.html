@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ristorante Pizzeria da Michele | Kippenheim</title>
+  <meta name="description" content="Italienische Spezialitäten in Kippenheim: Pizza, Pinsa, Pasta, Antipasti, Sommer-Innenhof und Abholung." />
+  <style>
+    :root{
+      --bg:#0d0d0f;
+      --bg-soft:#15161a;
+      --card:#1b1d22;
+      --card-2:#20232a;
+      --text:#f5efe5;
+      --muted:#c7bdab;
+      --line:rgba(255,255,255,.08);
+      --primary:#d84e2a;
+      --primary-2:#ffb86b;
+      --green:#2d6a4f;
+      --shadow:0 20px 50px rgba(0,0,0,.28);
+      --radius:24px;
+      --radius-sm:18px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(216,78,42,.18), transparent 28%),
+        radial-gradient(circle at top left, rgba(255,184,107,.10), transparent 26%),
+        linear-gradient(180deg, #0a0b0d 0%, #121318 100%);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 28px), var(--max));margin-inline:auto}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:.92rem
+    }
+    .topbar{
+      position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);
+      background:rgba(10,11,13,.72);border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{
+      width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));font-weight:800;color:#fff;box-shadow:var(--shadow)
+    }
+    .brand-copy{min-width:0}
+    .brand-copy strong{display:block;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-copy span{display:block;font-size:.82rem;color:var(--muted)}
+    .nav-links{display:none;gap:18px;color:var(--muted);font-size:.95rem}
+    .cta-top{display:flex;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      border-radius:999px;padding:13px 18px;font-weight:700;border:1px solid transparent;
+      transition:.2s ease;cursor:pointer
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;box-shadow:var(--shadow)}
+    .btn-secondary{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:var(--text)}
+
+    .hero{padding:24px 0 12px}
+    .hero-card{
+      border:1px solid var(--line);border-radius:32px;padding:22px 18px;background:
+      linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+      linear-gradient(135deg, rgba(216,78,42,.16), rgba(255,184,107,.06));
+      box-shadow:var(--shadow);overflow:hidden;position:relative
+    }
+    .hero-grid{display:grid;gap:20px}
+    h1{font-size:clamp(2rem,9vw,4.4rem);line-height:.97;margin:14px 0 14px;letter-spacing:-.04em}
+    .lead{font-size:1.04rem;color:var(--muted);max-width:60ch;margin:0 0 18px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+    .hero-panel{
+      border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:18px;background:rgba(10,10,12,.38)
+    }
+    .status{
+      display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:14px
+    }
+    .dot{width:12px;height:12px;border-radius:50%;background:#f39c12;box-shadow:0 0 0 6px rgba(243,156,18,.12)}
+    .dot.open{background:#2ecc71;box-shadow:0 0 0 6px rgba(46,204,113,.12)}
+    .info-list{display:grid;gap:12px;margin-top:10px}
+    .info-item{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+    .info-item small{display:block;color:var(--muted);margin-bottom:4px}
+
+    section{padding:16px 0}
+    .section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:16px}
+    .section-head h2{font-size:1.5rem;margin:0;letter-spacing:-.03em}
+    .section-head p{margin:0;color:var(--muted);max-width:62ch}
+
+    .grid{display:grid;gap:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px;font-size:1.08rem}
+    .muted{color:var(--muted)}
+    .hours{display:grid;gap:10px}
+    .hours-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .hours-row:last-child{border-bottom:none}
+    .hours-row strong{font-size:.97rem}
+
+    .feature-grid,.contact-grid,.menu-grid,.gallery-grid{display:grid;gap:14px}
+    .feature{padding:18px;border-radius:22px;background:var(--card);border:1px solid var(--line)}
+    .feature .icon{font-size:1.4rem;margin-bottom:10px}
+    .contact-card{display:grid;gap:10px}
+    .contact-line{padding:12px 14px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.03)}
+    .contact-line small{display:block;color:var(--muted);margin-bottom:4px}
+
+    .gallery-card{
+      overflow:hidden;
+      padding:0;
+    }
+    .gallery-placeholder{
+      min-height:260px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+      background:
+        linear-gradient(135deg, rgba(216,78,42,.18), rgba(255,184,107,.10)),
+        rgba(255,255,255,.03);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .gallery-placeholder span{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(10,10,12,.35);
+      border:1px solid rgba(255,255,255,.1);
+      color:var(--text);
+      font-weight:700;
+    }
+    .gallery-copy{
+      padding:18px;
+    }
+
+    .menu-group{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));border:1px solid var(--line);border-radius:26px;overflow:hidden}
+    .menu-head{padding:18px 18px 8px}
+    .menu-head h3{margin:0 0 6px;font-size:1.2rem}
+    .menu-head p{margin:0;color:var(--muted)}
+    .menu-items{padding:8px 10px 12px}
+    .item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:14px 10px;border-radius:16px}
+    .item + .item{border-top:1px solid rgba(255,255,255,.06)}
+    .item strong{display:block;margin-bottom:4px}
+    .item span{color:var(--muted);font-size:.94rem}
+    .price{font-weight:800;white-space:nowrap;padding-left:10px}
+
+    .note{padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--muted)}
+
+    .footer{padding:24px 0 110px}
+    .footer-card{display:grid;gap:14px}
+    .tiny{font-size:.86rem;color:var(--muted)}
+
+    .sticky-bar{
+      position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+      background:linear-gradient(180deg, rgba(10,11,13,0), rgba(10,11,13,.88) 24%, rgba(10,11,13,.96) 100%)
+    }
+    .sticky-inner{
+      width:min(calc(100% - 8px), 720px);margin-inline:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+      background:rgba(18,19,24,.86);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:10px;box-shadow:var(--shadow)
+    }
+    .sticky-inner a{display:grid;place-items:center;min-height:52px;border-radius:16px;background:rgba(255,255,255,.05);font-size:.92rem;font-weight:700}
+    .sticky-inner a.primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff}
+
+    @media (min-width: 780px){
+      .nav-links{display:flex}
+      .hero{padding:32px 0 14px}
+      .hero-card{padding:32px}
+      .hero-grid{grid-template-columns:1.2fr .8fr;align-items:center}
+      .feature-grid{grid-template-columns:repeat(3,1fr)}
+      .contact-grid{grid-template-columns:1fr 1fr}
+      .menu-grid{grid-template-columns:1fr 1fr}
+      .gallery-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (min-width: 1020px){
+      .sticky-bar{display:none}
+      .footer{padding-bottom:40px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">DM</div>
+        <div class="brand-copy">
+          <strong>Ristorante Pizzeria da Michele</strong>
+          <span>Kippenheim · Italienische Küche</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#menu">Speisekarte</a>
+        <a href="#zeiten">Öffnungszeiten</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <div class="cta-top">
+        <a class="btn btn-secondary" href="https://maps.google.com/?q=Poststra%C3%9Fe+16+77971+Kippenheim" target="_blank" rel="noreferrer">Route</a>
+        <a class="btn btn-primary" href="tel:+497825430">Anrufen</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-card">
+        <div class="hero-grid">
+          <div>
+            <span class="pill">Pizza · Pinsa · Pasta · Antipasti</span>
+            <h1>Italienisch, warm und direkt auf dem Handy bestellbar.</h1>
+            <p class="lead">Frisch zubereitete italienische Spezialitäten in Kippenheim, mit Abholung, gemütlicher Terrasse und stilvollem Innenbereich für entspannte Abende.</p>
+            <div class="badges">
+              <span class="pill">Poststraße 16 · 77971 Kippenheim</span>
+              <span class="pill">Telefon: 07825 430</span>
+              <span class="pill">Täglich 17:00–22:00 Uhr</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="tel:+497825430">Jetzt anrufen</a>
+              <a class="btn btn-secondary" href="#menu">Zur Speisekarte</a>
+              <a class="btn btn-secondary" href="https://maps.google.com/?q=Poststra%C3%9Fe+16+77971+Kippenheim" target="_blank" rel="noreferrer">Navigation starten</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Öffnungsstatus wird geladen</span></div>
+            <div class="info-list">
+              <div class="info-item">
+                <small>Heute</small>
+                <strong id="todayHours">Öffnungszeiten werden geladen</strong>
+              </div>
+              <div class="info-item">
+                <small>Abholung</small>
+                <strong>Bestellung telefonisch möglich</strong>
+              </div>
+              <div class="info-item">
+                <small>Ambiente</small>
+                <strong>Terrasse und Innenbereich für entspannte Abende</strong>
+              </div>
+              <div class="info-item">
+                <small>Parken</small>
+                <strong>Poststraße oder Parkplatz an der Querstraße</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Warum die Seite funktioniert</h2>
+          <p>Die wichtigsten Aktionen sind mobil sofort erreichbar: anrufen, Route starten, Speisekarte öffnen und Öffnungszeiten checken.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="icon">📞</div>
+            <h3>Sofortkontakt</h3>
+            <p class="muted">Ein Tap reicht, um anzurufen oder direkt die Route zum Restaurant zu öffnen.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🌿</div>
+            <h3>Atmosphäre</h3>
+            <p class="muted">Terrasse und Innenbereich bekommen sichtbar Platz statt nur im Text erwähnt zu werden.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🍕</div>
+            <h3>Speisekarte klar</h3>
+            <p class="muted">Pizza, Pinsa, Pasta und Antipasti sind sauber gegliedert und auf kleinen Screens gut lesbar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bilder">
+      <div class="container">
+        <div class="section-head">
+          <h2>Einblicke</h2>
+          <p>Hier können später echte Bilder von der Terrasse und vom Innenbereich eingesetzt werden, damit Gäste sofort einen Eindruck vom Restaurant bekommen.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="card gallery-card">
+            <div class="gallery-placeholder">
+              <span>Platzhalter Bild · Terrasse</span>
+            </div>
+            <div class="gallery-copy">
+              <h3>Terrasse</h3>
+              <p class="muted">Hier später ein Foto vom Außenbereich oder der Sommer-Terrasse einfügen.</p>
+            </div>
+          </div>
+          <div class="card gallery-card">
+            <div class="gallery-placeholder">
+              <span>Platzhalter Bild · Innenbereich</span>
+            </div>
+            <div class="gallery-copy">
+              <h3>Innenbereich</h3>
+              <p class="muted">Hier später ein Bild vom Gastraum, den Tischen oder dem Ambiente innen einsetzen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zeiten">
+      <div class="container contact-grid">
+        <div class="card">
+          <div class="section-head">
+            <h2>Öffnungszeiten</h2>
+          </div>
+          <div class="hours">
+            <div class="hours-row"><strong>Montag</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Dienstag</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Mittwoch</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Donnerstag</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Freitag</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Samstag</strong><span>17:00–22:00</span></div>
+            <div class="hours-row"><strong>Sonntag</strong><span>17:00–22:00</span></div>
+          </div>
+        </div>
+
+        <div class="card" id="kontakt">
+          <div class="section-head">
+            <h2>Kontakt</h2>
+          </div>
+          <div class="contact-card">
+            <a class="contact-line" href="tel:+497825430">
+              <small>Telefon</small>
+              <strong>07825 430</strong>
+            </a>
+            <a class="contact-line" href="mailto:bertoldo2300@gmail.com">
+              <small>E-Mail</small>
+              <strong>bertoldo2300@gmail.com</strong>
+            </a>
+            <a class="contact-line" href="https://maps.google.com/?q=Poststra%C3%9Fe+16+77971+Kippenheim" target="_blank" rel="noreferrer">
+              <small>Adresse</small>
+              <strong>Poststraße 16, 77971 Kippenheim</strong>
+            </a>
+            <div class="contact-line">
+              <small>Inhaber</small>
+              <strong>Vito Bertoldo</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rest deiner Speisekarte bleibt unverändert -->
+
+  </main>
+
+  <script>
+    const schedule = {
+      0: [["17:00","22:00"]],
+      1: [["17:00","22:00"]],
+      2: [["17:00","22:00"]],
+      3: [["17:00","22:00"]],
+      4: [["17:00","22:00"]],
+      5: [["17:00","22:00"]],
+      6: [["17:00","22:00"]]
+    };
+
+    const labels = {
+      0:"17:00–22:00",
+      1:"17:00–22:00",
+      2:"17:00–22:00",
+      3:"17:00–22:00",
+      4:"17:00–22:00",
+      5:"17:00–22:00",
+      6:"17:00–22:00"
+    };
+
+    function toMinutes(str){
+      const [h,m]=str.split(':').map(Number);
+      return h*60+m;
+    }
+
+    function isOpenNow(day, nowMins){
+      return (schedule[day] || []).some(([start,end]) => nowMins >= toMinutes(start) && nowMins <= toMinutes(end));
+    }
+
+    const now = new Date();
+    const day = now.getDay();
+    const mins = now.getHours()*60 + now.getMinutes();
+    const open = isOpenNow(day, mins);
+
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const todayHours = document.getElementById('todayHours');
+
+    todayHours.textContent = labels[day] || 'Heute geschlossen';
+
+    if(open){
+      statusDot.classList.add('open');
+      statusText.textContent = 'Gerade geöffnet';
+    } else {
+      statusText.textContent = 'Gerade geschlossen';
+    }
+  </script>
+</body>
+</html>
